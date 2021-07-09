@@ -1,0 +1,45 @@
+.dashboard-container {
+  text-align: center;
+  color: #ffffff;
+  width: 50%;
+  h1,
+  h2 {
+    color: #ffffff;
+    text-transform: uppercase;
+  }
+
+  .outer-orbit {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: -5rem;
+    -webkit-animation: spin-right 20s linear infinite;
+    animation: spin-right 20s linear infinite;
+  }
+
+  .outer-orbit-cirlces {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    background-color: #00ffca;
+    // position: relative;
+    // top: -17px;
+    // left: 125px;
+  }
+
+  .text-container {
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @keyframes spin-right {
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+}

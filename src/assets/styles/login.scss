@@ -1,0 +1,31 @@
+.login-container {
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 0.2rem;
+  form {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+
+    input {
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+    }
+    button {
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      width: 60%;
+      background-color: #0077bd;
+      outline-offset: 0;
+      border: none;
+      color: #ffffff;
+    }
+
+    h1 {
+      margin: 0;
+      font-weight: lighter;
+      color: gray;
+      padding-bottom: 0.2rem;
+    }
+  }
+}
