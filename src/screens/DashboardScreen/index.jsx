@@ -1,6 +1,19 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
-const Circles = (itemCount, circleSize) => {
+const circleSize = 40;
+const itemSize = 6;
+
+const spinRight = keyframes`
+    100% {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  `;
+
+const Circles = (itemCount) => {
   let styles = "";
 
   let rot = 0;
@@ -21,7 +34,7 @@ const Circles = (itemCount, circleSize) => {
   `;
 };
 
-const OnCircle = (itemCount, circleSize, itemSize) =>
+const OnCircle = () =>
   css`
     position: relative;
     width: ${circleSize}em;
@@ -32,9 +45,11 @@ const OnCircle = (itemCount, circleSize, itemSize) =>
   `;
 
 const CircleContainer = styled("ul")`
-  ${OnCircle((props) => props.itemCount, 20, 6)}
+  ${OnCircle()}
   margin: 5em auto 0;
   border: solid 5px tomato;
+  -webkit-animation: ${spinRight} 20s linear infinite;
+  animation: ${spinRight} 20s linear infinite;
 `;
 
 const Circle = styled("li")`
@@ -42,28 +57,24 @@ const Circle = styled("li")`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 6em;
-  height: 6em;
-  margin: -${6 / 2}em;
+  width: ${itemSize}em;
+  height: ${itemSize}em;
+  margin: -${itemSize / 2}em;
   border-radius: 100%;
   background-color: #00ffca;
 
-  ${Circles(8, 20)}
+  ${(props) => Circles(props.itemCount)}
 `;
 
 const DashboardScreen = () => {
+  const itemCount = 4;
   return (
     <div className="main-container">
       <div className="dashboard-container">
-        <CircleContainer itemCount={8}>
-          <Circle itemCount={8} />
-          <Circle itemCount={8} />
-          <Circle itemCount={8} />
-          <Circle itemCount={8} />
-          <Circle itemCount={8} />
-          <Circle itemCount={8} />
-          <Circle itemCount={8} />
-          <Circle itemCount={8} />
+        <CircleContainer>
+          {Array.from(Array(itemCount).keys()).map((r) => (
+            <Circle itemCount={itemCount} />
+          ))}
         </CircleContainer>
       </div>
     </div>
