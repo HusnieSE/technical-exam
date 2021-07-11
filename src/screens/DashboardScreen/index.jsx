@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
+
+import { api } from "../../api/config";
 
 const circleSize = 40;
 const itemSize = 6;
@@ -61,24 +65,132 @@ const Circle = styled("li")`
   height: ${itemSize}em;
   margin: -${itemSize / 2}em;
   border-radius: 100%;
-  background-color: #00ffca;
+  background-color: #ffffff;
 
   ${(props) => Circles(props.itemCount)}
 `;
 
+const Base = styled("div")`
+  background-color: tomato;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+`;
+
+const Footer = styled("footer")`
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  background-color: #00000070;
+`;
+
+const Button = styled("button")`
+  padding: 0.5rem 1.5rem;
+  text-transform: uppercase;
+  border-radius: 0.2rem;
+  border: 0;
+  margin-left: 1.5rem;
+  color: #000000;
+  ${(props) =>
+    props.logout &&
+    css`
+      background-color: #253337;
+      color: #ffffff;
+    `};
+`;
+
 const DashboardScreen = () => {
-  const itemCount = 4;
+  // list of online devices
+  const [onlineDevices, setDevices] = useState([]);
+
+  //   react outer
+  const history = useHistory();
+  //   api call get all online device
+  const getOnlineDevice = () => {
+    api.get("/devices").then(({ data }) => {
+      if (data?.devices) {
+        setDevices(data.devices);
+      }
+    });
+  };
+
+  //   handle Log out
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      sessionStorage.clear();
+      history.push("/");
+    }
+  };
+
+  const handleNotify = () => {
+    api
+      .post(
+        "/notify",
+        {
+          name: "Husnie Edres",
+          email: "husniese@gmail.com",
+          repoUrl: "https://github.com/HusnieSE/technical-exam",
+          message: "Job Done!",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("res: ", res);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //   useEffect
+  useEffect(() => {
+    //   check if user has token
+    const token = sessionStorage.getItem("token");
+    if (!token) {
+      history.push("/");
+    }
+  }, []);
+
+  useEffect(() => {
+    //   get all online devices every 5 secs
+    const intervalId = setInterval(getOnlineDevice, 5000);
+
+    // clear intervalid
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
-    <div className="main-container">
+    <Base>
       <div className="dashboard-container">
         <CircleContainer>
-          {Array.from(Array(itemCount).keys()).map((r) => (
-            <Circle itemCount={itemCount} />
+          {/* circle list */}
+          {onlineDevices?.map((r, index) => (
+            <Circle key={index} itemCount={onlineDevices.length} />
           ))}
         </CircleContainer>
+        <div className="text-container">
+          <h1> {onlineDevices.length} </h1>
+          <h2>
+            Device{onlineDevices.length > 1 ? "s" : ""} <br /> Online
+          </h2>
+        </div>
       </div>
-    </div>
+      <Footer>
+        <Button onClick={() => handleNotify()}>notify</Button>
+        <Button logout onClick={() => handleLogout()}>
+          log out
+        </Button>
+      </Footer>
+    </Base>
   );
 };
 
 export default DashboardScreen;
+
+// todo api connection

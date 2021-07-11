@@ -1,14 +1,21 @@
 .login-container {
   background-color: #ffffff;
-  padding: 3rem;
+  padding: 5rem 3rem;
   border-radius: 0.2rem;
+  width: 25%;
+  text-align: center;
+
+  .error {
+    color: tomato;
+  }
+
   form {
     flex-direction: column;
     display: flex;
     align-items: center;
-
+    margin-bottom: 1rem;
     input {
-      margin-bottom: 0.5rem;
+      // margin-bottom: 0.5rem;
       padding: 0.5rem;
     }
     button {
@@ -19,10 +26,11 @@
       outline-offset: 0;
       border: none;
       color: #ffffff;
+      margin-top: 1rem;
     }
 
     h1 {
-      margin: 0;
+      margin: 0 0 2rem 0;
       font-weight: lighter;
       color: gray;
       padding-bottom: 0.2rem;

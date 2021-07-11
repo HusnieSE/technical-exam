@@ -6,113 +6,21 @@
   h2 {
     color: #ffffff;
     text-transform: uppercase;
+    font-weight: lighter;
+  }
+  h1 {
+    font-size: xx-large;
   }
 
-  .outer-orbit {
-    display: flex;
-    justify-content: space-between;
-    width: 20em;
-    margin-bottom: -5rem;
-    -webkit-animation: spin-right 20s linear infinite;
-    animation: spin-right 20s linear infinite;
-    position: relative;
-    height: 20em;
-    border-radius: 50%;
-    padding: 0;
+  h2 {
+    font-size: small;
   }
-
-  .outer-orbit-cirlces {
-    height: 50px;
-    width: 50px;
-    border-radius: 100%;
-    background-color: #00ffca;
-    // position: relative;
-    // top: -17px;
-    // left: 125px;
-    display: block;
-    position: absolute;
-    margin: -(50px / 2);
-
-    $angle: (360 / 6);
-    $rot: 0;
-
-    @for $i from 1 through 6 {
-      &:nth-of-type(#{$i}) {
-        transform: rotate($rot * 1deg) translate(20em / 2) rotate($rot * -1deg);
-      }
-      $rot: $rot + $angle;
-    }
-  }
-
   .text-container {
     width: 25%;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  @keyframes spin-right {
-    100% {
-      -webkit-transform: rotate(360deg);
-      -moz-transform: rotate(360deg);
-      -ms-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
-
-  @mixin on-circle($item-count, $circle-size, $item-size) {
-    position: relative;
-    width: $circle-size;
-    height: $circle-size;
-    padding: 0;
-    border-radius: 50%;
-    list-style: none;
-    -webkit-animation: spin-right 20s linear infinite;
-    animation: spin-right 20s linear infinite;
-
-    > * {
-      display: block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: $item-size;
-      height: $item-size;
-      margin: -($item-size / 2);
-      border-radius: 100%;
-      background-color: #00ffca;
-
-      $angle: (360 / $item-count);
-      $rot: 0;
-
-      @for $i from 1 through $item-count {
-        &:nth-of-type(#{$i}) {
-          transform: rotate($rot * 1deg)
-            translate($circle-size / 2)
-            rotate($rot * -1deg);
-        }
-
-        $rot: $rot + $angle;
-      }
-    }
-  }
-
-  .circle-container {
-    @include on-circle($item-count: 8, $circle-size: 20em, $item-size: 6em);
-    margin: 5em auto 0;
-    border: solid 5px tomato;
-
-    img {
-      display: block;
-      max-width: 100%;
-      border-radius: 50%;
-      filter: grayscale(100%);
-      border: solid 5px tomato;
-      transition: 0.15s;
-
-      &:hover,
-      &:active {
-        filter: grayscale(0);
-      }
-    }
+    position: fixed;
+    top: 28em;
+    left: 38em;
   }
 }
