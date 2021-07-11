@@ -2,7 +2,11 @@
 
 ## Live Demo
 
-pren [http://meldcx-exam.surge.sh/](http://meldcx-exam.surge.sh/)
+open [http://meldcx-exam.surge.sh/](http://meldcx-exam.surge.sh/)
+
+## Credential
+
+Enter any email address, and password 'meld123'
 
 ## Available Scripts
 
