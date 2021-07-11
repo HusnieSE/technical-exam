@@ -143,7 +143,7 @@ const DashboardScreen = () => {
         }
       )
       .then((res) => {
-        console.log("res: ", res);
+        console.log("yehey success: ", res);
       })
       .catch((err) => console.log(err));
   };
